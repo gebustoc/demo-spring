@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
@@ -42,7 +42,6 @@ public class BookController {
     @PostMapping
     @Operation(summary = "Add a new book")
     public ResponseEntity<Book> createCarrera(@RequestBody Book book) {
-        System.out.println("📌 Llega al back: " + book);
         Book createdBook = bookService.saveBook(book);
         return ResponseEntity.status(201).body(createdBook);
     }
