@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-    
+
     @GetMapping
     @Operation(summary = "View a list of available books")
     public List<Book> getAllBooks() {
@@ -37,10 +38,13 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
+
     @PostMapping
     @Operation(summary = "Add a new book")
-    public Book createBook(@RequestBody Book book) {
-        return bookService.saveBook(book);
+    public ResponseEntity<Book> createCarrera(@RequestBody Book book) {
+        System.out.println("📌 Llega al back: " + book);
+        Book createdBook = bookService.saveBook(book);
+        return ResponseEntity.status(201).body(createdBook);
     }
 
     @PutMapping("/{id}")
