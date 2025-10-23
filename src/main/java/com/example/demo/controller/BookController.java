@@ -24,6 +24,7 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    
     @GetMapping
     @Operation(summary = "View a list of available books")
     public List<Book> getAllBooks() {
